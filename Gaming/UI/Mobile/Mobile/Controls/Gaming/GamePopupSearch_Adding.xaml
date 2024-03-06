@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Mobile.Controls.Gaming.GamePopupSearch_Adding">
+  <ScrollView>
+    <Grid
+          Padding="5"
+          RowSpacing="5">
+      <Grid.RowDefinitions>
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+        <RowDefinition
+Height="auto" />
+      </Grid.RowDefinitions>
+      <Label              
+                Grid.Row="0"
+                StyleClass="FormElementLabel"
+                Text="{Binding GameSearchResultCount, StringFormat='{0} Search Results:'}" />
+
+      <Grid
+              IsVisible="{Binding IsSearching}"
+              Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition
+                    Height="auto" />
+        </Grid.RowDefinitions>
+        <Label
+                  Grid.Row="0"
+                  StyleClass="PopupLabel"
+                  Text="Please wait whilst we search for any games with this search string" />
+      </Grid>
+
+      <Grid
+                IsVisible="{Binding IsSearching, Converter={toolkit:InvertedBoolConverter}}"
+                Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition
+  Height="auto" />
+          <RowDefinition
+  Height="auto" />
+          <RowDefinition
+  Height="auto" />
+        </Grid.RowDefinitions>
+        <!-- SelectedValuePath="Id" -->
+        <editors:SfComboBox
+                    Grid.Row="0"
+                      MaxDropDownHeight="300"                      
+                    DisplayMemberPath="Name"                    
+                    SelectedItem="{Binding ModifyGameDataSource.SelectedSearchedGame}"
+                    ItemsSource="{Binding GameSearchResults}">
+          <editors:SfComboBox.ItemTemplate>
+            <DataTemplate>
+              <Grid
+                        HeightRequest="100">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition
+    Width="100" />
+                  <ColumnDefinition
+    Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image
+                          Grid.Column="0"
+                          HeightRequest="100"
+                          Source="{Binding Cover.Url}" />
+
+                <Label
+                      Grid.Column="1"
+                      Text="{Binding Name}" />
+
+              </Grid>
+            </DataTemplate>
+          </editors:SfComboBox.ItemTemplate>
+        </editors:SfComboBox>
+
+        <Label
+                  StyleClass="FormElementLabel"
+                  Grid.Row="1"
+                  Text="Summary: " />
+
+        <ScrollView
+            MaximumHeightRequest="200"
+            Grid.Row="2">
+          <Label                                      
+        Text="{Binding ModifyGameDataSource.SelectedSearchedGame.Summary}"  />
+        </ScrollView>
+
+      </Grid>
+
+      <Grid
+  Grid.Row="3">
+        <Grid.RowDefinitions>
+          <RowDefinition
+Height="auto" />
+          <RowDefinition
+Height="auto" />
+        </Grid.RowDefinitions>
+        <Label
+            StyleClass="FormElementLabel"
+    Grid.Row="0"
+    Text="CeX Search" />
+        <!-- SelectedValuePath="BoxId" -->
+        <Entry
+          Grid.Row="1"
+          Text="{Binding ModifyGameDataSource.CeXGame}" />
+      </Grid>
+
+    </Grid>
+  </ScrollView>
+</ContentView>

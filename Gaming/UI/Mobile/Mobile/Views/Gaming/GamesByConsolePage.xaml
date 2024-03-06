@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:convertors="clr-namespace:Mobile.Common.Convertors"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
+             x:Class="Mobile.Views.Gaming.GamesByConsolePage"
+             ControlTemplate="{StaticResource MainPageTemplate}"
+             Title="GamesByConsolePage">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <convertors:ListViewItemDoubleTappedConvertor
+        x:Key="listViewItemDoubleTappedConvertor" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
+  <syncfusion:SfListView
+  ItemSize="150"
+  HeaderSize="60"
+  ItemSpacing="5"
+  AllowSwiping="True"    
+  ItemsSource="{Binding DataSource}">
+
+    <syncfusion:SfListView.Behaviors>
+      <prism:EventToCommandBehavior
+        Command="{Binding SelectConsoleCommand}"
+        EventArgsConverter="{StaticResource Key='listViewItemDoubleTappedConvertor'}"
+        EventName="ItemDoubleTapped" />
+    </syncfusion:SfListView.Behaviors>
+    
+    <syncfusion:SfListView.ItemsLayout>
+      <syncfusion:GridLayout
+        SpanCount="2" />
+    </syncfusion:SfListView.ItemsLayout>
+    <syncfusion:SfListView.ItemTemplate>
+      <DataTemplate>
+
+        <Border>
+        <Grid
+          Margin="5">
+          <Grid.RowDefinitions>
+            <RowDefinition
+  Height="auto" />
+            <RowDefinition
+  Height="auto" />
+              <RowDefinition
+              Height="auto" />
+            </Grid.RowDefinitions>
+
+          <Image
+            Grid.Row="0"
+            HeightRequest="100"
+            WidthRequest="100">
+            <Image.Source>
+
+              <UriImageSource
+Uri="{Binding ImageUrl}"
+CachingEnabled="True"
+CacheValidity="365" />
+
+            </Image.Source>
+          </Image>
+
+          <Label
+            Grid.Row="1"
+            LineBreakMode="NoWrap"
+            Text="{Binding Name}" />
+
+            <Label
+              Grid.Row="2"
+              Text="{Binding GameCount, StringFormat='{0} games'}" />
+
+          </Grid>
+        </Border>
+      </DataTemplate>
+    </syncfusion:SfListView.ItemTemplate>
+  </syncfusion:SfListView>
+
+</ContentPage>

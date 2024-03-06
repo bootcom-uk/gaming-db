@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Mobile.Controls.Gaming.AddGamePopupGeneralPage">
+
+  <ContentView.Content>
+    
+
+      <ScrollView
+                Grid.Row="1">
+        <Grid
+              Padding="5"
+              RowSpacing="5">
+          <Grid.RowDefinitions>
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+            <RowDefinition
+    Height="auto" />
+          </Grid.RowDefinitions>
+          <Label
+                Grid.Row="0"
+                StyleClass="FormElementLabel"
+                Text="Console" />
+          <editors:SfComboBox
+                Grid.Row="1"
+                TextSearchMode="Contains"
+                DisplayMemberPath="Name"
+                SelectedValuePath="Id"
+                IsEditable="True"
+                SelectedItem="{Binding ModifyGameDataSource.SelectedConsole}"
+                ItemsSource="{Binding ConsoleTypesDataSource}">
+            <editors:SfComboBox.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+                          Height="100" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                          Width="100" />
+                    <ColumnDefinition
+                          Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Source="{Binding ImageUrl}" />
+                  <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding Name}" />
+                </Grid>
+              </DataTemplate>
+            </editors:SfComboBox.ItemTemplate>
+          </editors:SfComboBox>
+
+          <Label
+                Grid.Row="2"
+                StyleClass="FormElementLabel"
+                Text="Game" />
+
+          <Entry
+                Grid.Row="3"
+                Text="{Binding ModifyGameDataSource.Name}">
+            <Entry.Behaviors>
+              <toolkit:UserStoppedTypingBehavior 
+                    Command="{Binding GameSearchCommand}"
+                    StoppedTypingTimeThreshold="1000"
+                    MinimumLengthThreshold="2"
+                    ShouldDismissKeyboardAutomatically="True" />
+            </Entry.Behaviors>
+          </Entry>
+
+
+
+          <Label
+  Grid.Row="6"
+  StyleClass="FormElementLabel"
+  Text="Price Paid:" />
+          <editors:SfNumericEntry
+                  Grid.Row="7"
+                    Value="{Binding ModifyGameDataSource.AmountPaid}" />
+
+          <Label              
+    Grid.Row="8"
+    StyleClass="FormElementLabel"
+    Text="Game Included:" />
+
+          <Switch
+    IsToggled="{Binding ModifyGameDataSource.HasGame}"
+    Grid.Row="9" />
+
+          <Label              
+    Grid.Row="10"
+    StyleClass="FormElementLabel"
+    Text="Case Included:" />
+
+          <Switch
+    IsToggled="{Binding ModifyGameDataSource.HasCase}"
+    Grid.Row="11" />
+
+          <Label              
+  Grid.Row="12"
+  StyleClass="FormElementLabel"
+  Text="Manual Included:" />
+
+          <Switch
+  IsToggled="{Binding ModifyGameDataSource.HasManual}"
+  Grid.Row="13" />
+
+          <Label              
+  Grid.Row="14"
+  StyleClass="FormElementLabel"
+  Text="Is Special Edition:" />
+
+          <Switch
+  IsToggled="{Binding ModifyGameDataSource.IsSpecialEdition}"
+  Grid.Row="15" />
+
+          <Label              
+  Grid.Row="16"
+  StyleClass="FormElementLabel"
+  Text="Is Copy:" />
+
+          <Switch
+  IsToggled="{Binding ModifyGameDataSource.IsCopy}"
+  Grid.Row="17" />
+
+          <Label              
+  Grid.Row="18"
+  StyleClass="FormElementLabel"
+  Text="Is Non Pal Region:" />
+
+          <Switch                
+  IsToggled="{Binding ModifyGameDataSource.IsNonPalRegion}"
+  Grid.Row="19" />
+
+          <Label              
+Grid.Row="20"
+StyleClass="FormElementLabel"
+Text="Notes:" />
+
+          <Editor
+                Grid.Row="21"
+                HeightRequest="150"
+                Text="{Binding ModifyGameDataSource.Notes}" />
+
+        </Grid>
+      </ScrollView>
+
+  </ContentView.Content>
+  
+</ContentView>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="Mobile.Views.Personal.UserDetailsPage"
+             ControlTemplate="{StaticResource MainPageTemplate}"
+             Title="UserDetailsPage">
+
+  <ContentPage.Content>
+
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition
+          Height="auto" />
+        <RowDefinition
+          Height="*" />
+      </Grid.RowDefinitions>
+      <Button
+Grid.Row="0"
+StyleClass="SaveButton"
+Command="{Binding SaveGameCommand}" />
+      <tabView:SfTabView
+        Grid.Row="1">
+        <tabView:SfTabView.Items>
+          <tabView:SfTabItem
+    TextColor="{StaticResource White}"
+  Header="CeX">
+            <Grid
+            Padding="5"
+            ColumnSpacing="5"
+            RowSpacing="5">
+              <Grid.RowDefinitions>
+                <RowDefinition
+Height="auto" />
+                <RowDefinition
+Height="auto" />
+                <RowDefinition
+Height="auto" />
+                <RowDefinition
+Height="auto" />
+                <RowDefinition
+Height="auto" />
+                <RowDefinition
+Height="auto" />
+              </Grid.RowDefinitions>
+              <Label
+              StyleClass="FormElementLabel"
+              Grid.Row="0"
+              Text="Member Id:" />
+              <editors:SfNumericEntry
+              Grid.Row="1"
+                CustomFormat="n0"
+                Value="{Binding DataSource.CeXMemberId}"
+               />
+              <Label
+StyleClass="FormElementLabel"
+Grid.Row="2"
+Text="Username:" />
+              <Entry
+                Text="{Binding DataSource.CeXMemberUsername}"
+              Grid.Row="3" />
+              <Label
+StyleClass="FormElementLabel"
+Grid.Row="4"
+Text="Password:" />
+              <Entry
+              IsPassword="True"
+                Text="{Binding DataSource.CeXMemberPassword}"
+  Grid.Row="5" />
+            </Grid>
+          </tabView:SfTabItem>
+        </tabView:SfTabView.Items>
+      </tabView:SfTabView>
+    </Grid>
+    
+    
+  </ContentPage.Content>
+  
+</ContentPage>

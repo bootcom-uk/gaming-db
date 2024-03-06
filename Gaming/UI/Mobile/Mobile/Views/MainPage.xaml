@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             xmlns:mainScreenControls="clr-namespace:Mobile.Controls.MainScreen"
+             xmlns:triggers="clr-namespace:Mobile.Common.Triggers"
+             Title="{Binding Title}"
+             ControlTemplate="{StaticResource MainPageTemplate}"
+             x:Class="Mobile.Views.MainPage">
+
+  <ContentPage.Resources>
+    <ControlTemplate x:Key="TileControlTemplate">
+      <Border Stroke="Magenta"
+    StrokeThickness="10"
+             
+    StrokeShape="RoundRectangle 20,20,20,20"
+    Background="#2B0B98"
+    Padding="16,8"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
+        <Border.GestureRecognizers>
+          <TapGestureRecognizer
+            NumberOfTapsRequired="2"
+            Tapped="TapGestureRecognizer_Tapped" />
+        </Border.GestureRecognizers>
+        <ContentPresenter />
+      </Border>
+    </ControlTemplate>
+  </ContentPage.Resources>
+  
+  <Grid
+    ColumnSpacing="5"
+    RowSpacing="5">
+
+    <Grid.RowDefinitions>
+      <RowDefinition
+  Height="100" />
+      <RowDefinition
+  Height="100" />
+      <RowDefinition
+  Height="100" />
+    </Grid.RowDefinitions>
+    
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition
+  Width="0.25*" />
+      <ColumnDefinition
+  Width="0.25*" />
+      <ColumnDefinition
+  Width="0.25*" />
+      <ColumnDefinition
+  Width="0.25*" />
+    </Grid.ColumnDefinitions>
+
+    <ContentView
+    Grid.Column="0"
+    Grid.ColumnSpan="2"
+    Grid.Row="0"
+    BackgroundColor="Blue">
+      <Frame>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition
+Height="*" />
+            <RowDefinition
+Height="auto" />
+          </Grid.RowDefinitions>
+          <Label
+        Grid.Row="0"
+        Text="Number Of Games:" />
+          <Label
+        Grid.Row="1"
+        Text="12345" />
+        </Grid>
+      </Frame>
+    </ContentView>
+
+    <ContentView
+      ControlTemplate="{StaticResource TileControlTemplate}"
+      Grid.Column="0"
+      Grid.ColumnSpan="2"
+      Grid.Row="1">
+      <Label
+        Text="Hello World" />
+    </ContentView>
+    
+  </Grid>
+
+</ContentPage>

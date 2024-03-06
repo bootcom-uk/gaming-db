@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="Mobile.Controls.Gaming.ViewGamePopup">
+
+  <ContentView.Content>
+
+    <popup:SfPopup
+      HeaderTitle="{Binding ViewGameDataSource.Name}"
+      IsOpen="{Binding ShowViewGamePopup}"
+      ShowCloseButton="True"
+      IsFullScreen="True">
+
+      <popup:SfPopup.ContentTemplate>
+        <DataTemplate>
+
+          <tabView:SfTabView>
+            <tabView:SfTabItem
+              Header="General Information">
+
+              <ScrollView>
+              
+                <Grid
+                  ColumnSpacing="5"
+                  RowSpacing="5">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                      Width="0.5*" />
+                    <ColumnDefinition
+                      Width="0.5*" />
+                  </Grid.ColumnDefinitions>
+                
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                  </Grid.RowDefinitions>
+
+                  <Image
+                    Grid.ColumnSpan="2"
+              Grid.Row="0"
+              HeightRequest="100"
+              HorizontalOptions="Center"
+              Source="{Binding ViewGameDataSource.GameCoverUrl}" />
+
+                  <Label
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    StyleClass="FormElementLabel"
+                    Text="Summary:" />
+
+                  <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    StyleClass="FormElementLabel"
+                    Text="{Binding ViewGameDataSource.Summary}" />
+
+                  <Label
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    StyleClass="FormElementLabel"
+                    Text="IGDB Link:" />
+
+                  <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    StyleClass="FormElementLabel"
+                    Text="Includes Game:" />
+
+                  <Switch
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    IsEnabled="False"
+                    IsToggled="{Binding ViewGameDataSource.HasGame}" />
+
+                  <Label
+    Grid.Row="6"
+    Grid.Column="0"
+    StyleClass="FormElementLabel"
+    Text="Includes Case:" />
+
+                  <Switch
+    Grid.Row="6"
+    Grid.Column="1"
+    IsEnabled="False"
+    IsToggled="{Binding ViewGameDataSource.HasCase}" />
+
+                  <Label
+  Grid.Row="7"
+  Grid.Column="0"
+  StyleClass="FormElementLabel"
+  Text="Includes Manual:" />
+
+                  <Switch
+  Grid.Row="7"
+  Grid.Column="1"
+  IsEnabled="False"
+  IsToggled="{Binding ViewGameDataSource.HasManual}" />
+
+                  <Label
+  Grid.Row="8"
+  Grid.Column="0"
+  StyleClass="FormElementLabel"
+  Text="Special Edition:" />
+
+                  <Switch
+  Grid.Row="8"
+  Grid.Column="1"
+  IsEnabled="False"
+  IsToggled="{Binding ViewGameDataSource.IsSpecialEdition}" />
+
+                  <Label
+  Grid.Row="9"
+  Grid.Column="0"
+  StyleClass="FormElementLabel"
+  Text="Is Copy:" />
+
+                  <Switch
+  Grid.Row="9"
+  Grid.Column="1"
+  IsEnabled="False"
+  IsToggled="{Binding ViewGameDataSource.IsCopy}" />
+
+
+                  <Label
+  Grid.Row="10"
+  Grid.Column="0"
+  StyleClass="FormElementLabel"
+  Text="Is Non-PAL region:" />
+
+                  <Switch
+  Grid.Row="10"
+  Grid.Column="1"
+  IsEnabled="False"
+  IsToggled="{Binding ViewGameDataSource.IsNonPalRegion}" />
+
+
+                  <Label
+                    Grid.ColumnSpan="2"
+                    Grid.Row="11"
+                    StyleClass="FormElementLabel"
+                    Text="Notes:" />
+
+                  <Label
+                    Grid.Row="12"
+                    Grid.ColumnSpan="2"
+                    StyleClass="FormElementLabel"
+                    Text="{Binding ViewGameDataSource.Notes}" />
+                
+                </Grid>
+              </ScrollView>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem
+  Header="Financials">
+              <Grid
+                ColumnSpacing="5"
+                RowSpacing="5">
+                <Grid.RowDefinitions>
+                  <RowDefinition
+                    Height="auto" />
+                  <RowDefinition
+                    Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+            Grid.Row="0"
+            StyleClass="FormElementLabel"
+            Text="Price Paid:" />
+
+                <Label
+            Grid.Row="1"
+            StyleClass="FormElementLabel"
+            Text="{Binding ViewGameDataSource.AmountPaid, StringFormat='{0:C2}'}" />
+
+                <chart:SfCartesianChart
+                  Grid.Row="2">
+                  
+                  <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis />
+                  </chart:SfCartesianChart.XAxes>
+                  
+                  <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis />
+                  </chart:SfCartesianChart.YAxes>
+
+                  <chart:LineSeries
+                    XBindingPath="Date"
+                    ItemsSource="{Binding ViewGameDataSource.SelectedCexGame.HistoricalPrices}"                   
+                    YBindingPath="Price"
+                    ShowDataLabels="True"
+                    ShowMarkers="True"
+                    />
+
+                </chart:SfCartesianChart>
+
+              </Grid>  
+            </tabView:SfTabItem>
+          </tabView:SfTabView>
+          
+          
+        </DataTemplate>
+      </popup:SfPopup.ContentTemplate>
+      
+    </popup:SfPopup>
+    
+  </ContentView.Content>
+  
+</ContentView>

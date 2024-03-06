@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:convertors="clr-namespace:Mobile.Common.Convertors"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Mobile.Views.Gaming.ConsolesPage"
+             ControlTemplate="{StaticResource MainPageTemplate}">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <convertors:ListViewItemDoubleTappedConvertor
+        x:Key="listViewItemDoubleTappedConvertor" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <ContentPage.Content>
+    <Grid>
+      
+      <popup:SfPopup
+      ShowCloseButton="True"
+      IsFullScreen="True"
+      HeaderTitle="{Binding PopupTitle}"
+      ShowHeader="True"
+      IsOpen="{Binding IsModifyConsolePopupOpen}">
+        <popup:SfPopup.ContentTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition
+  Height="auto" />
+                <RowDefinition
+  Height="*" />
+              </Grid.RowDefinitions>
+              <Button
+              Command="{Binding PopupSaveCommand}"
+              Grid.Row="0"
+              StyleClass="SaveButton" />
+              <ScrollView
+              Grid.Row="1">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+Height="100" />
+                    <RowDefinition
+Height="auto" />
+                    <RowDefinition
+Height="auto" />
+                    <RowDefinition
+Height="auto" />
+                    <RowDefinition
+Height="auto" />
+                    <RowDefinition
+Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Image
+                    Grid.Row="0"
+                    Source="{Binding PopupDataSource.CoverURL}"
+                    HeightRequest="100"
+                    WidthRequest="100" />
+                  <Label
+                    Grid.Row="1"
+                    StyleClass="FormElementLabel"
+                    Text="Name:" />
+                  <Entry
+                    Grid.Row="2"
+                    Text="{Binding PopupDataSource.Name}" />
+                  <Label
+                    Grid.Row="3"
+                    StyleClass="FormElementLabel"
+                    Text="CeX Id:" />
+                  <editors:SfNumericEntry
+                    Grid.Row="4"
+                    StyleClass="IntegerNumericEntry"
+                    Value="{Binding PopupDataSource.CeXConsoleId}" />
+                  <Label
+                    Grid.Row="5"
+                    StyleClass="FormElementLabel"
+                    Text="In Use:" />
+                  <Switch
+                    Grid.Row="6"
+                    IsToggled="{Binding PopupDataSource.Enabled}" />
+                </Grid>
+              </ScrollView>
+            </Grid>
+          </DataTemplate>
+        </popup:SfPopup.ContentTemplate>
+      </popup:SfPopup>
+
+      <syncfusion:SfListView
+  ItemSize="150"
+  HeaderSize="60"
+  ItemSpacing="5"
+  AllowSwiping="True"    
+  ItemsSource="{Binding DataSource}">
+
+        <syncfusion:SfListView.Behaviors>
+          <prism:EventToCommandBehavior
+        Command="{Binding SelectConsoleCommand}"
+        EventArgsConverter="{StaticResource Key='listViewItemDoubleTappedConvertor'}"
+        EventName="ItemDoubleTapped" />
+        </syncfusion:SfListView.Behaviors>
+
+        <syncfusion:SfListView.ItemsLayout>
+          <syncfusion:GridLayout
+        SpanCount="2" />
+        </syncfusion:SfListView.ItemsLayout>
+
+        <syncfusion:SfListView.ItemTemplate>
+          <DataTemplate>
+
+            <Border
+BackgroundColor="{StaticResource White}"            
+StrokeThickness="0">
+              <Border.StrokeShape>
+                <RoundRectangle                
+    CornerRadius="25,25,25,25" />
+              </Border.StrokeShape>
+              <ContentView>
+                <Grid
+          Margin="5">
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+  Height="auto" />
+                    <RowDefinition
+  Height="auto" />
+                  </Grid.RowDefinitions>
+
+                  <Image
+            Grid.Row="0"
+            HeightRequest="100"
+            WidthRequest="100">
+                    <Image.Source>
+
+                      <UriImageSource
+Uri="{Binding ImageUrl}"
+CachingEnabled="True"
+CacheValidity="365" />
+
+                    </Image.Source>
+                  </Image>
+
+                  <Label
+            Grid.Row="1"
+          Text="{Binding Name}" />
+
+                </Grid>
+              </ContentView>
+            </Border>
+          </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
+      </syncfusion:SfListView>
+
+    </Grid>
+  </ContentPage.Content>
+  
+
+
+</ContentPage>

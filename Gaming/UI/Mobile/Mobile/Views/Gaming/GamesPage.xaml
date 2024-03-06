@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:convertors="clr-namespace:Mobile.Common.Convertors"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:controls="clr-namespace:Mobile.Controls.Gaming"
+             x:Class="Mobile.Views.Gaming.GamesPage"
+             ControlTemplate="{StaticResource MainPageTemplate}"
+             Title="GamesPage">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <convertors:GameAttributesConvertor
+        x:Key="GameAttributesConvertor" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="*" />
+    </Grid.RowDefinitions>
+
+    <controls:ViewGamePopup />
+
+    <popup:SfPopup
+      ShowCloseButton="True"
+      IsFullScreen="True"
+      HeaderTitle="{Binding AddGamePopupHeaderText}"
+      ShowHeader="True"
+      IsOpen="{Binding IsModifyGamePopupOpen}">
+      <popup:SfPopup.ContentTemplate>
+        <DataTemplate>
+
+          <Grid>
+
+            <Grid.RowDefinitions>
+              <RowDefinition
+  Height="auto" />
+              <RowDefinition
+  Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button
+Grid.Row="0"
+StyleClass="SaveButton"
+Command="{Binding SaveGameCommand}" />
+
+            <tabView:SfTabView
+            Grid.Row="1"
+            x:Name="tabView">
+              <tabView:SfTabView.Items>
+                <tabView:SfTabItem
+                  TextColor="{StaticResource White}"
+                Header="General">
+                  <tabView:SfTabItem.Content>
+                    <controls:AddGamePopupGeneralPage />
+                  </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <tabView:SfTabItem
+                  TextColor="{StaticResource White}"                  
+                  Header="{Binding AddGamePopupTabHeaderSearchText}">
+                  <tabView:SfTabItem.Content>
+                    <controls:AddGamePopupSearchPage />
+                  </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+              </tabView:SfTabView.Items>
+            </tabView:SfTabView>
+
+          </Grid>
+          
+        </DataTemplate>        
+      </popup:SfPopup.ContentTemplate>
+    </popup:SfPopup>
+    
+    <syncfusion:SfListView
+      x:Name="lvGames"
+      Grid.Row="0"
+      ItemSize="150"
+      HeaderSize="100"      
+      ItemSpacing="5"
+      AllowSwiping="True"
+      IsStickyHeader="True"      
+      ItemsSource="{Binding DataSource}">
+
+      <syncfusion:SfListView.Behaviors>
+        <prism:EventToCommandBehavior
+          EventName="ItemDoubleTapped"
+          Command="{Binding ViewGameCommand}"
+          EventArgsParameterPath="DataItem" />
+      </syncfusion:SfListView.Behaviors>
+      
+      <syncfusion:SfListView.HeaderTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition
+            Height="auto" />
+              <RowDefinition
+Height="auto" />
+              <RowDefinition
+Height="auto" />
+            </Grid.RowDefinitions>
+            <Button
+              Command="{Binding EditGameCommand}"
+              Grid.Row="0"
+              Text="Add New Game" />
+            <Label
+              Grid.Row="1"
+              StyleClass="FormElementLabel"
+              Text="Search Games:" />
+            <SearchBar
+              x:Name="txtSearch"
+              Grid.Row="2"
+              TextChanged="txtSearch_TextChanged"
+              />
+          </Grid>
+        </DataTemplate>
+      </syncfusion:SfListView.HeaderTemplate>
+
+      <syncfusion:SfListView.StartSwipeTemplate>
+        <DataTemplate>
+          <Grid
+            ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition
+  Width="100" />
+            </Grid.ColumnDefinitions>
+            <ImageButton
+  Command="{Binding Source={x:Reference lvGames},Path=BindingContext.EditGameCommand}"
+  CommandParameter="{Binding Id}"
+  StyleClass="EditSwipeButton" />
+          </Grid>
+        </DataTemplate>
+      </syncfusion:SfListView.StartSwipeTemplate>
+      
+      <syncfusion:SfListView.ItemTemplate>
+        <DataTemplate>
+          <Border
+BackgroundColor="{StaticResource White}"            
+StrokeThickness="0">
+            <Border.StrokeShape>
+              <RoundRectangle                
+    CornerRadius="25,25,25,25" />
+            </Border.StrokeShape>
+            <ContentView>
+              <Grid
+              Padding="5">
+                <Grid.RowDefinitions>
+                  <RowDefinition
+  Height="auto" />
+                  <RowDefinition
+Height="*" />
+                  <RowDefinition
+Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition
+                  Width="100" />
+                  <ColumnDefinition
+                  Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                HeightRequest="100"
+                Aspect="AspectFill">
+                  <Image.Source>
+                    <UriImageSource
+                    Uri="{Binding GameCoverUrl}"
+                    CachingEnabled="True"
+                    CacheValidity="365" />
+                  </Image.Source>
+                </Image>
+                <Label
+                Padding="5,0,0,0"
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalTextAlignment="Start"
+                LineBreakMode="WordWrap"
+                Text="{Binding Name}" />
+                <Label
+                Padding="5,5,0,0"
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalTextAlignment="Start"
+                LineBreakMode="WordWrap"
+                MaxLines="4"
+                Text="{Binding Summary}" />
+                <Label
+                Grid.Row="2"
+                Grid.Column="1">
+                  <Label.Text>
+                    <MultiBinding Converter="{StaticResource GameAttributesConvertor}">
+                      <Binding Path="HasGame" />
+                      <Binding Path="HasManual" />
+                      <Binding Path="HasCase" />
+                      <Binding Path="IsCollectorsEdition" />
+                      <Binding Path="IsCopy" />
+                      <Binding Path="IsNonPalRegion" />
+                    </MultiBinding>
+                  </Label.Text>
+                </Label>
+              </Grid>
+            </ContentView>
+          </Border>
+        </DataTemplate>
+      </syncfusion:SfListView.ItemTemplate>
+
+    </syncfusion:SfListView>
+
+  </Grid>
+  
+</ContentPage>

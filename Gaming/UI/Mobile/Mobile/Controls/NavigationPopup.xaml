@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:convertors="clr-namespace:Mobile.Common.Convertors"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             x:Class="Mobile.Controls.NavigationPopup">
+
+  <ContentView.Resources>
+    <ResourceDictionary>
+      <convertors:NotIsEqualsConvertor
+        x:Key="notIsEqualsConvertor" />
+    </ResourceDictionary>
+  </ContentView.Resources>
+  
+  <popup:SfPopup
+    x:Name="sfPopup"
+    ShowCloseButton="True"
+    IsFullScreen="True"
+    HeaderTitle=" "
+    ShowHeader="True"
+    IsOpen="{Binding IsNavigationPopupOpen}">
+    <popup:SfPopup.ContentTemplate>
+      <DataTemplate>
+        <Grid
+            Margin="5,0,5,0">
+
+          <Grid.RowDefinitions>
+            <RowDefinition
+Height="140" />
+            <RowDefinition
+Height="140" />
+            <RowDefinition
+Height="140" />
+            <RowDefinition
+Height="140" />
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition
+  Width="0.5*" />
+            <ColumnDefinition
+  Width="0.5*" />
+          </Grid.ColumnDefinitions>
+
+          <Button
+             StyleClass="NavigationButton"
+             Grid.Row="0"
+             Grid.Column="0"
+             BackgroundColor="{StaticResource Yellow200Accent}"             
+             Command="{Binding NavigateCommand}"
+             CommandParameter="MainPage"
+             Text="Home"
+             IsEnabled="{Binding CurrentScreen, Converter={StaticResource notIsEqualsConvertor}, ConverterParameter='MainPage'}"
+             />
+
+
+          <Button
+              StyleClass="NavigationButton"
+              Grid.Row="0"
+              Grid.Column="1"
+              BackgroundColor="{StaticResource Cyan200Accent}"            
+              Command="{Binding NavigateCommand}"
+              CommandParameter="ConsolesPage"
+              Text="Consoles"
+              IsEnabled="{Binding CurrentScreen, Converter={StaticResource notIsEqualsConvertor}, ConverterParameter='ConsolesPage'}"
+              />
+
+          <Button
+    StyleClass="NavigationButton"
+    Grid.Row="1"
+    Grid.Column="0"
+    BackgroundColor="{StaticResource Blue100Accent}"            
+    Command="{Binding NavigateCommand}"
+    CommandParameter="GamesByConsolePage"        
+    Text="Games"
+    IsEnabled="{Binding CurrentScreen, Converter={StaticResource notIsEqualsConvertor}, ConverterParameter='GamesByConsolePage'}"
+      />
+
+          <Button
+StyleClass="NavigationButton"
+Grid.Row="1"
+Grid.Column="1"
+BackgroundColor="{StaticResource Cyan200Accent}"            
+Command="{Binding NavigateCommand}"
+CommandParameter="UserDetailsPage"        
+Text="User Details"
+IsEnabled="{Binding CurrentScreen, Converter={StaticResource notIsEqualsConvertor}, ConverterParameter='UserDetailsPage'}"
+  />
+
+          <Button
+StyleClass="NavigationButton"
+Grid.Row="2"
+Grid.Column="0"
+BackgroundColor="{StaticResource Cyan200Accent}"            
+Command="{Binding NavigateCommand}"
+CommandParameter="MyCeXWishlistPage"        
+Text="My CeX Wishlist"
+IsEnabled="{Binding CurrentScreen, Converter={StaticResource notIsEqualsConvertor}, ConverterParameter='MyCeXWishlistPage'}"
+  />
+
+        </Grid>
+      </DataTemplate>
+    </popup:SfPopup.ContentTemplate>
+  </popup:SfPopup>
+</ContentView>

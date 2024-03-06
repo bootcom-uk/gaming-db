@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             x:Class="Mobile.Views.Gaming.MyCeXWishlistPage"
+             ControlTemplate="{StaticResource MainPageTemplate}">
+  <Grid>
+
+    <Grid.RowDefinitions>
+      <RowDefinition
+    Height="*" />
+    </Grid.RowDefinitions>
+
+    <syncfusion:SfListView
+  x:Name="lvGames"
+  Grid.Row="0"
+  ItemSize="150"
+  HeaderSize="100"      
+  ItemSpacing="5"
+  AllowSwiping="True"
+  IsStickyHeader="True"      
+  ItemsSource="{Binding DataSource}">
+
+      <syncfusion:SfListView.HeaderTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition
+  Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition
+  Width="auto" />
+              <ColumnDefinition
+  Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+              Grid.Row="0"
+              Grid.Column="0"
+              Text="Only Show Active Items" />
+            <Switch
+              Grid.Row="0"
+              Grid.Column="1"
+              x:Name="swShowOnlyActiveItems"              
+              IsToggled="True"
+              Toggled="swShowOnlyActiveItems_Toggled"/>
+          </Grid>
+        </DataTemplate>
+      </syncfusion:SfListView.HeaderTemplate>
+      
+      <syncfusion:SfListView.ItemTemplate>
+        <DataTemplate>
+
+          <Border
+BackgroundColor="{StaticResource White}"            
+StrokeThickness="0">
+            <Border.StrokeShape>
+              <RoundRectangle                
+    CornerRadius="25,25,25,25" />
+            </Border.StrokeShape>
+            <ContentView>
+              <Grid
+                Padding="5"
+                ColumnSpacing="5"
+                RowSpacing="5">
+                <Grid.RowDefinitions>
+                  <RowDefinition
+Height="auto" />
+                  <RowDefinition
+Height="auto" />
+                  <RowDefinition
+Height="auto" />
+                </Grid.RowDefinitions>
+                <Label
+    StyleClass="HeaderLabel"
+Grid.Row="0"
+Text="{Binding BoxId.Name}" />
+                <Label
+Grid.Row="1"
+Text="{Binding BoxId.CeXCategoryName}" />
+                <Label
+Grid.Row="2"
+Text="{Binding BoxId.LastSalePrice, StringFormat='{0:C2}'}" />
+              </Grid>
+            </ContentView>
+          </Border>
+
+        </DataTemplate>
+      </syncfusion:SfListView.ItemTemplate>
+
+    </syncfusion:SfListView>
+
+  </Grid>
+</ContentPage>
