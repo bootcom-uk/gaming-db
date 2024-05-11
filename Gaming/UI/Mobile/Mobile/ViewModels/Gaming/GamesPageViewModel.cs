@@ -173,7 +173,7 @@ namespace Mobile.ViewModels.Gaming
                     AddGamePopupTabHeaderSearchText = "Search";
                     IsSearching = false;
                 });
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 GameSearchResultCount = 0;
                 GameSearchResults = Enumerable.Empty<GameSearchResult>();

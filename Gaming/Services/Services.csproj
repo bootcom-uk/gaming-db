@@ -6,13 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="appsettings.development.json" Condition="'$(Configuration)'=='DEBUG'" />
+		<EmbeddedResource Include="appsettings.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="appsettings.development.json" Condition="'$(Configuration)'=='DEBUG'" />
+		<EmbeddedResource Include="appsettings.json" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />

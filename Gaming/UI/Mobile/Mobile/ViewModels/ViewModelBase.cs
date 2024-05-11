@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MAUI.Stats;
 using Services;
 
 namespace Mobile.ViewModels
@@ -38,6 +39,7 @@ namespace Mobile.ViewModels
 
             CurrentScreen = InternalSettings.CurrentScreen;
             FooterText = $"© 2023 - {DateTime.Now.Year} BootCom";
+
         }
 
         public abstract void OnNavigatedFrom(INavigationParameters parameters);

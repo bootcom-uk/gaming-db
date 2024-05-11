@@ -1,6 +1,7 @@
 ﻿using Gaming.RealmObjects;
 using Realms.Sync;
 using Services.Config;
+using System.IO;
 using System.Reflection;
 using System.Text.Json;
 
@@ -9,12 +10,7 @@ namespace Services
     public class RealmService(byte[] encryptionKey)
     {
 
-        private Realms.Realm _realm { get; set; }
-
-        public Realms.Realm Realm
-        {
-            get { return _realm; }
-        }
+        public Realms.Realm? Realm { get; private set; }
 
         internal Guid? _userId;
 
@@ -28,7 +24,16 @@ namespace Services
             if (Realm != null) return;
 
             var assembly = Assembly.GetExecutingAssembly();
-            var appSettingsStream = assembly.GetManifestResourceStream("Services.appsettings.json");
+
+            var appSettingsStream = null as Stream;
+
+#if DEBUG
+            appSettingsStream = assembly.GetManifestResourceStream("Services.appsettings.development.json");
+
+#else
+            appSettingsStream = assembly.GetManifestResourceStream("Services.appsettings.json");
+#endif
+
             var appSettings = await JsonSerializer.DeserializeAsync<AppSettings>(appSettingsStream!);
 
             var app = Realms.Sync.App.Create(new AppConfiguration(appSettings!.RealmDetails.AppId));
@@ -42,23 +47,23 @@ namespace Services
 
             config.EncryptionKey = encryptionKey;
 
-            _realm = Realms.Realm.GetInstance(config);
+            Realm = Realms.Realm.GetInstance(config);
 
-            var path = _realm.Config.DatabasePath;
+            var path = Realm.Config.DatabasePath;
 
-            _realm.Subscriptions.Update(() =>
+            Realm.Subscriptions.Update(() =>
             {
-                _realm.Subscriptions.Add(_realm.All<ConsoleType>(), new() { Name = "Console Types" });
-                _realm.Subscriptions.Add(_realm.All<Game>().Where(record => record.UserId == _userId), new() { Name = "Games" });
-                _realm.Subscriptions.Add(_realm.All<GamePriceCheck>().Where(record => record.UserId == _userId), new() { Name = "Game Price Checks" });
-                _realm.Subscriptions.Add(_realm.All<CeXGame>(), new() { Name = "CeX Game listings" });
-                _realm.Subscriptions.Add(_realm.All<UserDetails>().Where(record => record.UserId == _userId), new() { Name = "User Details" });
-                _realm.Subscriptions.Add(_realm.All<CeXWishlist>().Where(record => record.UserId == _userId), new() { Name = "CeX Wishlist" });
+                Realm.Subscriptions.Add(Realm.All<ConsoleType>(), new() { Name = "Console Types" });
+                Realm.Subscriptions.Add(Realm.All<Game>().Where(record => record.UserId == _userId), new() { Name = "Games" });
+                Realm.Subscriptions.Add(Realm.All<GamePriceCheck>().Where(record => record.UserId == _userId), new() { Name = "Game Price Checks" });
+                Realm.Subscriptions.Add(Realm.All<CeXGame>(), new() { Name = "CeX Game listings" });
+                Realm.Subscriptions.Add(Realm.All<UserDetails>().Where(record => record.UserId == _userId), new() { Name = "User Details" });
+                Realm.Subscriptions.Add(Realm.All<CeXWishlist>().Where(record => record.UserId == _userId), new() { Name = "CeX Wishlist" });
             });
 
             try
             {
-                await _realm.Subscriptions.WaitForSynchronizationAsync();
+                await Realm.Subscriptions.WaitForSynchronizationAsync();
             }
             catch (Exception exception)
             {

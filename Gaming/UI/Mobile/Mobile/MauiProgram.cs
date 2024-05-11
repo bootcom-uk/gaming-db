@@ -12,6 +12,7 @@ using System.Reflection;
 using ZXing.Net.Maui.Controls;
 using Mobile.Views.Personal;
 using Mobile.ViewModels.Personal;
+using MAUI.Stats;
 
 namespace Mobile
 {
@@ -19,14 +20,23 @@ namespace Mobile
     {
         public static MauiApp CreateMauiApp()
         {
-            var currentAssembly = Assembly.GetExecutingAssembly();
-            using var stream = currentAssembly.GetManifestResourceStream("Mobile.appsettings.json");
+            var assembly = Assembly.GetExecutingAssembly();
+            var appSettingsStream = null as Stream;
+
+#if DEBUG
+            appSettingsStream = assembly.GetManifestResourceStream("Mobile.appsettings.development.json");
+
+#else
+            appSettingsStream = assembly.GetManifestResourceStream("Mobile.appsettings.json");
+#endif
 
             var config = new ConfigurationBuilder()
-                        .AddJsonStream(stream)
+                        .AddJsonStream(appSettingsStream)
                         .Build();
 
             var builder = MauiApp.CreateBuilder();
+            builder.Services.SetupDeviceMetrics();
+            
             builder.Configuration.AddConfiguration(config);
             builder
                 .UseMauiApp<App>()

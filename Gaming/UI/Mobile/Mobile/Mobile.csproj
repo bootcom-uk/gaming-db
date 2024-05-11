@@ -87,6 +87,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.development.json" />
     <None Remove="appsettings.json" />
     <None Remove="Resources\Fonts\ARLRDBD.TTF" />
     <None Remove="Resources\Images\bootcom_whitetext_transparentbg.png" />
@@ -97,6 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="appsettings.development.json" Condition="'$(Configuration)'=='DEBUG'" />
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
 
@@ -104,22 +106,23 @@
     <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
     <PackageReference Include="BootCom-Maui-Shared-Controls" Version="1.0.2" />
     <PackageReference Include="BootCom-Maui-Shared-Extensions" Version="1.0.1" />
+    <PackageReference Include="BootCom-Maui-Stats" Version="1.0.1" />
     <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.2.0" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.3.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
     <PackageReference Include="Prism.DryIoc.Maui" Version="9.0.271-pre" />
-    <PackageReference Include="Syncfusion.Maui.Charts" Version="24.2.5" />
-    <PackageReference Include="Syncfusion.Maui.Inputs" Version="24.2.5" />
-    <PackageReference Include="Syncfusion.Maui.ListView" Version="24.2.5" />
-    <PackageReference Include="Syncfusion.Maui.Popup" Version="24.2.5" />
-    <PackageReference Include="Syncfusion.Maui.TabView" Version="24.2.5" />
+    <PackageReference Include="Syncfusion.Maui.Charts" Version="25.1.35" />
+    <PackageReference Include="Syncfusion.Maui.Inputs" Version="25.1.35" />
+    <PackageReference Include="Syncfusion.Maui.ListView" Version="25.1.35" />
+    <PackageReference Include="Syncfusion.Maui.Popup" Version="25.1.35" />
+    <PackageReference Include="Syncfusion.Maui.TabView" Version="25.1.35" />
     <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
+    <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>
