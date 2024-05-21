@@ -87,8 +87,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.development.json" />
-    <None Remove="appsettings.json" />
     <None Remove="Resources\Fonts\ARLRDBD.TTF" />
     <None Remove="Resources\Images\bootcom_whitetext_transparentbg.png" />
     <None Remove="Resources\Images\delete.png" />
