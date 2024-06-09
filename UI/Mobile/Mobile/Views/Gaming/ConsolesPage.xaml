@@ -87,6 +87,7 @@ Height="auto" />
                     Text="In Use:" />
                   <Switch
                     Grid.Row="6"
+                    IsEnabled="{Binding PopupDataSource.HasGames, Converter={toolkit:InvertedBoolConverter}}"
                     IsToggled="{Binding PopupDataSource.Enabled}" />
                 </Grid>
               </ScrollView>
@@ -96,12 +97,14 @@ Height="auto" />
       </popup:SfPopup>
 
       <syncfusion:SfListView
+        x:Name="lvConsoles"
+        IsStickyHeader="True"
   ItemSize="150"
   HeaderSize="60"
   ItemSpacing="5"
   AllowSwiping="True"    
   ItemsSource="{Binding DataSource}">
-
+        
         <syncfusion:SfListView.Behaviors>
           <prism:EventToCommandBehavior
         Command="{Binding SelectConsoleCommand}"
@@ -114,6 +117,35 @@ Height="auto" />
         SpanCount="2" />
         </syncfusion:SfListView.ItemsLayout>
 
+        <syncfusion:SfListView.HeaderTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition
+                  Height="auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition
+  Width="auto" />
+                <ColumnDefinition
+  Width="auto" />
+              </Grid.ColumnDefinitions>
+
+              <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalTextAlignment="Center"
+                Text="Display Consoles Not In Use:" />
+
+              <Switch
+                Grid.Row="0"
+                Grid.Column="1"
+                IsToggled="True"
+                Toggled="swShowAllConsoles_Toggled" />
+            </Grid>
+          </DataTemplate>
+        </syncfusion:SfListView.HeaderTemplate>
+        
         <syncfusion:SfListView.ItemTemplate>
           <DataTemplate>
 

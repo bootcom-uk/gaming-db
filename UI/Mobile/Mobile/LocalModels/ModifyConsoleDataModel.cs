@@ -16,6 +16,9 @@ namespace Mobile.LocalModels
         int? ceXConsoleId;
 
         [ObservableProperty]
+        bool hasGames;
+
+        [ObservableProperty]
         bool enabled;
 
         [ObservableProperty]
