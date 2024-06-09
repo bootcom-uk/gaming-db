@@ -133,7 +133,7 @@ namespace Mobile.ViewModels.Gaming
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            DataSource = await _consoleService.GetActiveConsoles();
+            DataSource = await _consoleService.GetConsoles();
         }
     }
 }

@@ -162,7 +162,7 @@ namespace Mobile.ViewModels.Gaming
                     }
                     response.ForEach(record =>
                     {
-                        if (record.Cover.Url.StartsWith("//"))
+                        if (record.Cover != null && record.Cover.Url.StartsWith("//"))
                         {
                             record.Cover.Url = $"https:{record.Cover.Url}";
                         }
