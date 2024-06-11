@@ -140,6 +140,22 @@ Height="auto" />
           </Grid>
         </DataTemplate>
       </syncfusion:SfListView.StartSwipeTemplate>
+
+      <syncfusion:SfListView.EndSwipeTemplate>
+        <DataTemplate>
+          <Grid
+            ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition
+Width="100" />
+            </Grid.ColumnDefinitions>
+            <ImageButton
+Command="{Binding Source={x:Reference lvGames},Path=BindingContext.DeleteGameCommand}"
+CommandParameter="{Binding Id}"
+StyleClass="DeleteSwipeButton" />
+          </Grid>
+        </DataTemplate>
+      </syncfusion:SfListView.EndSwipeTemplate>
       
       <syncfusion:SfListView.ItemTemplate>
         <DataTemplate>

@@ -13,6 +13,32 @@ namespace Services.DataServices
     {
 
 
+        public async Task DeleteGame(Game game)
+        {
+            if (realmService.Realm is null) await realmService.InitializeAsync();
+
+            await realmService.Realm!.WriteAsync(() =>
+            {
+                var console = realmService.Realm!.All<ConsoleType>()
+                .Where(record => record.Id == game.ConsoleId!.Id)
+                .FirstOrDefault();
+
+                var consoleGameCount = realmService.Realm!.All<Game>()
+                .Where(record => record.ConsoleId == game.ConsoleId)
+                .Count();
+
+                console!.GameCount = consoleGameCount;
+                console!.GameCount--;
+                realmService.Realm.Add(console, true);
+            });
+
+            await realmService.Realm!.WriteAsync(() =>
+            {
+                realmService.Realm.Remove(game);
+            });
+
+        }
+
         public async Task SaveGame(Game game, bool isUpdate)
         {
             if (realmService.Realm is null) await realmService.InitializeAsync();

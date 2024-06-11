@@ -183,6 +183,20 @@ namespace Mobile.ViewModels.Gaming
         }
 
         [RelayCommand]
+        async Task DeleteGame(ObjectId? gameId)
+        {
+            if (gameId is null) return;
+
+            var game = await _gamesService.GetGameById(gameId);
+
+            if (game is null) return;
+
+            await _gamesService.DeleteGame(game);
+
+            await RefreshViewCommand.ExecuteAsync(null);
+        }
+
+        [RelayCommand]
         async Task EditGame(ObjectId? gameId)
         {
             IsUpdate = true;
