@@ -10,9 +10,14 @@ namespace Gaming.RealmObjects
         [MapTo("_id")]
         [PrimaryKey]
         public ObjectId Id { get; set; }
+
         public CeXGame? BoxId { get; set; }
+
         public Guid? UserId { get; set; }
+
         public bool Active { get; set; }
+
+        public string? CoverUrl { get; set; }
 
     }
 }

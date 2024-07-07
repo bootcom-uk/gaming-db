@@ -24,7 +24,7 @@ namespace Mobile.LocalModels
         string ceXGame;
 
         [ObservableProperty]
-        int igdbId;
+        long igdbId;
 
         [ObservableProperty]
         string igdbUrl;

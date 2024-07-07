@@ -39,7 +39,7 @@ namespace IGDB
             return await WebClient!.GetIGDBRecords<GameSearchResult>(searchCriteria: searchBody);
         }
 
-        public async Task<GameSearchResult?> GetGameDetail(int igdbId)
+        public async Task<GameSearchResult?> GetGameDetail(long igdbId)
         {
             var searchBody = $"where id = ({igdbId});{Environment.NewLine}";            
             searchBody += "fields id, cover.url,name,url,summary;" + Environment.NewLine;

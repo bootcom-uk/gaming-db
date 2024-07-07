@@ -12,6 +12,32 @@ namespace Services.DataServices
     public class GamesService(RealmService realmService, ConsoleService consoleService)
     {
 
+        public async Task<List<Game>> GamesAssociatedToCeXWishlistAtHighestPrice()
+        {
+
+            if (realmService.Realm is null) await realmService.InitializeAsync();
+
+            var games = realmService.Realm!.All<Game>()
+                .ToList()
+                .Where(record => record.CexDetails != null && record.CexDetails.HighestSalePrice == record.CexDetails.LastSalePrice)
+                .ToList();
+
+            return games;
+        }
+
+        public async Task<List<Game>> GamesAssociatedToCeXWishlistAtLowestPrice()
+        {
+
+            if (realmService.Realm is null) await realmService.InitializeAsync();
+
+            var games = realmService.Realm!.All<Game>()
+                .ToList()
+                .Where(record => record.CexDetails != null && record.CexDetails.LowestSalePrice == record.CexDetails.LastSalePrice)
+                .ToList();
+
+            return games;
+        }
+
 
         public async Task DeleteGame(Game game)
         {

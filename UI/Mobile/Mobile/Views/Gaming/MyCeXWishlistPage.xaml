@@ -36,10 +36,14 @@
               <ColumnDefinition
   Width="auto" />
             </Grid.ColumnDefinitions>
+            
             <Label
+              VerticalTextAlignment="Center"
+              Padding="0,0,15,0"
               Grid.Row="0"
               Grid.Column="0"
-              Text="Only Show Active Items" />
+              Text="Also display archived items:" />
+            
             <Switch
               Grid.Row="0"
               Grid.Column="1"
@@ -65,6 +69,14 @@ StrokeThickness="0">
                 Padding="5"
                 ColumnSpacing="5"
                 RowSpacing="5">
+
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition
+                    Width="150" />
+                  <ColumnDefinition
+                    Width="*" />
+                </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
                   <RowDefinition
 Height="auto" />
@@ -73,16 +85,37 @@ Height="auto" />
                   <RowDefinition
 Height="auto" />
                 </Grid.RowDefinitions>
+
+                <Image
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Grid.Column="0"
+                    WidthRequest="100"
+                    Aspect="AspectFit">
+                  <Image.Source>
+                    <UriImageSource
+                      Uri="{Binding CoverUrl}"
+                      CachingEnabled="True"
+                      CacheValidity="365" />
+                  </Image.Source>
+                </Image>
+
                 <Label
-    StyleClass="HeaderLabel"
-Grid.Row="0"
-Text="{Binding BoxId.Name}" />
+                    StyleClass="HeaderLabel"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding BoxId.Name}" />
+                
                 <Label
-Grid.Row="1"
-Text="{Binding BoxId.CeXCategoryName}" />
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding BoxId.CeXCategoryName}" />
+                
                 <Label
-Grid.Row="2"
-Text="{Binding BoxId.LastSalePrice, StringFormat='{0:C2}'}" />
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding BoxId.LastSalePrice, StringFormat='{0:C2}'}" />
+                
               </Grid>
             </ContentView>
           </Border>
