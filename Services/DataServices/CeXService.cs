@@ -13,7 +13,7 @@ namespace Services.DataServices
             _realmService = realmService;
         }
 
-        public async Task<CeXGame?> SaveCeXBoxInformation(string? boxId, int igdbId, string name)
+        public async Task<CeXGame?> SaveCeXBoxInformation(string? boxId, long igdbId, string name)
         {
             if (_realmService.Realm is null) await _realmService.InitializeAsync();
 

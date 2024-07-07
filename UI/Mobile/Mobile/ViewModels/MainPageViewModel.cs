@@ -1,35 +1,43 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Services;
 using IGDB;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Services.DataServices;
 
 namespace Mobile.ViewModels
 {
     public partial class MainPageViewModel : ViewModelBase
     {
-        
-        private string _text = "Click me";
 
-        public MainPageViewModel(ISemanticScreenReader screenReader, INavigationService navigationService, RealmService realmService) : base(screenReader, navigationService, realmService)
+        [ObservableProperty]
+        GamesService gameService;
+
+        public MainPageViewModel(ISemanticScreenReader screenReader, INavigationService navigationService, RealmService realmService, GamesService gamesService) : base(screenReader, navigationService, realmService)
         {
             Title = "Main Page";
+            GameService = gamesService;
         }
-
-        public string Text
-        {
-            get => _text;
-            set => SetProperty(ref _text, value);
-        }
-
-        public DelegateCommand CountCommand { get; }
 
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        [ObservableProperty]
+        int numberOfGamesAssociatedToCexWishlistAtHighestPrice;
+
+        [ObservableProperty]
+        int numberOfGamesAssociatedToCexWishlistAtLowestPrice;
+
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            
+            var highestPriceList = await GameService.GamesAssociatedToCeXWishlistAtHighestPrice();
+            var lowestPriceList = await GameService.GamesAssociatedToCeXWishlistAtLowestPrice();
+
+            NumberOfGamesAssociatedToCexWishlistAtHighestPrice = highestPriceList.Count();
+            NumberOfGamesAssociatedToCexWishlistAtLowestPrice = lowestPriceList.Count();
+
         }
     }
 }

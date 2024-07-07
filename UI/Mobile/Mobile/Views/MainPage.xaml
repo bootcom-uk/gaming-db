@@ -13,11 +13,12 @@
       <Border Stroke="Magenta"
     StrokeThickness="10"
              
-    StrokeShape="RoundRectangle 20,20,20,20"
-    Background="#2B0B98"
+    StrokeShape="RoundRectangle 20,20,20,20"    
     Padding="16,8"
     HorizontalOptions="Fill"
     VerticalOptions="Fill">
+        
+                
         <Border.GestureRecognizers>
           <TapGestureRecognizer
             NumberOfTapsRequired="2"
@@ -83,6 +84,16 @@ Height="auto" />
       <Label
         Text="Hello World" />
     </ContentView>
+
+    
+    <ContentView
+  ControlTemplate="{StaticResource TileControlTemplate}"
+  Grid.Column="0"
+  Grid.Row="2">
+      <Label
+        Text="{Binding NumberOfGamesAssociatedToCexWishlistAtLowestPrice, StringFormat='Number Of Games On Wishlist At Lowest Ever Price: {0}'}" />
+    </ContentView>
+    
     
   </Grid>
 

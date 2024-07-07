@@ -13,7 +13,7 @@ namespace Gaming.RealmObjects
         public bool? HasCase { get; set; }
         public bool? HasGame { get; set; }
         public bool? HasManual { get; set; }
-        public int? IgdbId { get; set; }
+        public long? IgdbId { get; set; }
         public string? IgdbUrl { get; set; }
         public bool? IsCollectorsEdition { get; set; }
         public bool? IsCopy { get; set; }

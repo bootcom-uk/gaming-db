@@ -205,6 +205,8 @@
                     Height="auto" />
                   <RowDefinition
                     Height="auto" />
+                  <RowDefinition
+                    Height="*" />
                 </Grid.RowDefinitions>
 
                 <Label
@@ -230,7 +232,7 @@
 
                   <chart:LineSeries
                     XBindingPath="Date"
-                    ItemsSource="{Binding ViewGameDataSource.SelectedCexGame.HistoricalPrices}"                   
+                    ItemsSource="{Binding ViewGameDataSource.CeXGameData.HistoricalPrices}"                   
                     YBindingPath="Price"
                     ShowDataLabels="True"
                     ShowMarkers="True"

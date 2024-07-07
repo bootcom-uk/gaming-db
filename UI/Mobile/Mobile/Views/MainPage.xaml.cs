@@ -14,8 +14,9 @@
             if (_isRunning) return;
             _isRunning = true;
             (sender as Border).Stroke = Color.Parse("Black");
+            (sender as Border).Background = Color.Parse("Magenta");
             Dispatcher.CreateTimer();
-            Dispatcher.StartTimer(TimeSpan.FromMilliseconds(600), () =>
+            Dispatcher.StartTimer(TimeSpan.FromSeconds(6), () =>
             {
                 (sender as Border).Stroke = Color.Parse("Magenta");
                 _isRunning = false;
